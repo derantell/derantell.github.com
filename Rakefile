@@ -8,10 +8,10 @@ ssh_user       = "user@domain.com"
 ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = false
-deploy_default = "rsync"
+deploy_default = "push"
 
 # This will be configured for you when you run config_deploy
-deploy_branch  = "gh-pages"
+deploy_branch  = "master"
 
 ## -- Misc Configs -- ##
 
@@ -303,8 +303,8 @@ task :setup_github_pages, :repo do |t, args|
     puts "(For example, 'git@github.com:your_username/your_username.github.com)"
     repo_url = get_stdin("Repository url: ")
   end
-  user = repo_url.match(/:([^\/]+)/)[1]
-  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? 'gh-pages' : 'master'
+  user = repo_url.match(/https:\/\/github\.com\/([^\/]+)/)[1]
+  branch = (repo_url.match(/\/[\w-]+\.github\.com/).nil?) ? 'gh-pages' : 'master'
   project = (branch == 'gh-pages') ? repo_url.match(/\/([^\.]+)/)[1] : ''
   unless `git remote -v`.match(/origin.+?octopress.git/).nil?
     # If octopress is still the origin remote (from cloning) rename it to octopress
@@ -335,7 +335,7 @@ task :setup_github_pages, :repo do |t, args|
   mkdir deploy_dir
   cd "#{deploy_dir}" do
     system "git init"
-    system "echo 'My Octopress Page is coming soon &hellip;' > index.html"
+    system "echo 'My Octopress Page is coming soon ...' > index.html"
     system "git add ."
     system "git commit -m \"Octopress init\""
     system "git branch -m gh-pages" unless branch == 'master'
