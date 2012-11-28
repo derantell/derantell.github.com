@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Department 1337</title>
+  <title>A Powershell cmdlet to remove meaningless fluff from C# files - Department 1337</title>
   <meta name="author" content="David Tellander">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://derantell.github.com/">
+  <link rel="canonical" href="http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,15 +62,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/">A Powershell Cmdlet to Remove Meaningless Fluff From C# Files</a></h1>
+      <h1 class="entry-title">A Powershell Cmdlet to Remove Meaningless Fluff From C# Files</h1>
     
     
       <p class="meta">
@@ -93,7 +90,7 @@
   </header>
 
 
-  <div class="entry-content"><p>In C# you can add folding points to the code file by using the <code>#region</code> directive. The question of <a href="http://stackoverflow.com/questions/755465/do-you-say-no-to-c-sharp-regions">how and when</a> (<a href="http://www.codinghorror.com/blog/2008/07/the-problem-with-code-folding.html">if ever</a>) to use this feature is an endless debate among C# developers. Some find it useful for grouping members with related functionality or by accessibility level, some just hate them.</p>
+<div class="entry-content"><p>In C# you can add folding points to the code file by using the <code>#region</code> directive. The question of <a href="http://stackoverflow.com/questions/755465/do-you-say-no-to-c-sharp-regions">how and when</a> (<a href="http://www.codinghorror.com/blog/2008/07/the-problem-with-code-folding.html">if ever</a>) to use this feature is an endless debate among C# developers. Some find it useful for grouping members with related functionality or by accessibility level, some just hate them.</p>
 
 <p>My personal opinion is that regions are pretty much useless. When I open a file in the editor I expect to see the code. Not a bunch of gray text blocks, which is the default behavior in Visual Studio. Hiding generated code that is never to be touched or non-implemented members from a poorly designed abstract base class with too many responsibilities, are a couple of use cases that I think are justified. A few years ago I found out that you could disable folding/outlining by navigating to <em>tools > options > text editor > c# > advanced</em> and uncheck the <em>Enter outlining mode when files open</em> option. I&#8217;ve left it like that ever since. There is also the <a href="http://visualstudiogallery.msdn.microsoft.com/0ca60d35-1e02-43b7-bf59-ac7deb9afbca">I Hate #Regions</a> Visual Studio extension that does the same thing, more or less.</p>
 
@@ -235,18 +232,57 @@
 
 <p>Blue and yellow text are matches to the regex. You can <a href="https://github.com/derantell/MyPsUtils">get the code at GitHub</a> if you face similar problems.</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">David Tellander</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2012-11-28T23:01:00+01:00" pubdate data-updated="true">2012-11-28 23:01</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/powershell/'>powershell</a>, <a class='category' href='/blog/categories/regex/'>regex</a>, <a class='category' href='/blog/categories/style/'>style</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/" data-via="derantell" data-counturl="http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -263,7 +299,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/derantell">@derantell</a> on GitHub
@@ -293,7 +329,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -312,6 +348,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
