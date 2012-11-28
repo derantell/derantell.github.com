@@ -4,7 +4,7 @@
   <title><![CDATA[Category: regex | Department 1337]]></title>
   <link href="http://derantell.github.com/blog/categories/regex/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-11-29T00:14:19+01:00</updated>
+  <updated>2012-11-29T00:24:29+01:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -126,7 +126,7 @@ PROCESS {
 
 <p>The result looks like this in <a href="http://www.regexbuddy.com">RegexBuddy</a>, my weapon of choice when it comes to constructing and testing regexes.</p>
 
-<p><img src="/images/regionregex.png" alt="Screenshot of RegexBuddy" /></p>
+<p><img src="/images/regionregex.PNG" alt="Screenshot of RegexBuddy" /></p>
 
 <p>Blue and yellow text are matches to the regex. You can <a href="https://github.com/derantell/MyPsUtils">get the code at GitHub</a> if you face similar problems.</p>
 ]]></content>
