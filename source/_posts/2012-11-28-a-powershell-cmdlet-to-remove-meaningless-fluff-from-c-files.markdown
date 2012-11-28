@@ -103,6 +103,6 @@ Lastly we close the grouping that wraps the expression and match the rest of the
 
 The result looks like this in [RegexBuddy](http://www.regexbuddy.com), my weapon of choice when it comes to constructing and testing regexes. 
 
-![Screenshot of RegexBuddy](/images/regionregex.png)
+![Screenshot of RegexBuddy](/images/regionregex.PNG)
 
 Blue and yellow text are matches to the regex. You can [get the code at GitHub](https://github.com/derantell/MyPsUtils) if you face similar problems. 
