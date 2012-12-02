@@ -4,7 +4,7 @@
   <title><![CDATA[Category: style | Department 1337]]></title>
   <link href="http://derantell.github.com/blog/categories/style/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-11-29T00:24:29+01:00</updated>
+  <updated>2012-12-02T23:15:47+01:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -19,6 +19,9 @@
     <updated>2012-11-28T23:01:00+01:00</updated>
     <id>http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files</id>
     <content type="html"><![CDATA[<p>In C# you can add folding points to the code file by using the <code>#region</code> directive. The question of <a href="http://stackoverflow.com/questions/755465/do-you-say-no-to-c-sharp-regions">how and when</a> (<a href="http://www.codinghorror.com/blog/2008/07/the-problem-with-code-folding.html">if ever</a>) to use this feature is an endless debate among C# developers. Some find it useful for grouping members with related functionality or by accessibility level, some just hate them.</p>
+
+<!-- More -->
+
 
 <p>My personal opinion is that regions are pretty much useless. When I open a file in the editor I expect to see the code. Not a bunch of gray text blocks, which is the default behavior in Visual Studio. Hiding generated code that is never to be touched or non-implemented members from a poorly designed abstract base class with too many responsibilities, are a couple of use cases that I think are justified. A few years ago I found out that you could disable folding/outlining by navigating to <em>tools > options > text editor > c# > advanced</em> and uncheck the <em>Enter outlining mode when files open</em> option. I've left it like that ever since. There is also the <a href="http://visualstudiogallery.msdn.microsoft.com/0ca60d35-1e02-43b7-bf59-ac7deb9afbca">I Hate #Regions</a> Visual Studio extension that does the same thing, more or less.</p>
 

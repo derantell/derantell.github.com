@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Department 1337]]></title>
+  <link href="http://derantell.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://derantell.github.com/"/>
+  <updated>2012-12-02T23:15:47+01:00</updated>
+  <id>http://derantell.github.com/</id>
+  <author>
+    <name><![CDATA[David Tellander]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with Octopress on Windows]]></title>
+    <link href="http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows/"/>
+    <updated>2012-12-02T22:56:00+01:00</updated>
+    <id>http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows</id>
+    <content type="html"><![CDATA[<p>This blog is using the <a href="http://octopress.org/">Octopress</a> framework for the <a href="https://github.com/mojombo/jekyll">Jekyll</a> static site generator. When setting everything up I followed the <a href="http://octopress.org/docs/setup/">Octopress setup guide</a> and <a href="http://blog.zerosharp.com/setting-up-octopress-on-windows/">Rob Anderson's instructions</a> on how to do this on a Windows 7 machine. In this post I'll describe a few tweaks I had to make to get it all set up.</p>
+
+<!-- More -->
+
+
+<h2>The hellip command</h2>
+
+<p>Cloning the repo and installing the dependencies and the theme went without any problems. I experienced a slight hiccup when running the <code>setup_github_pages</code> task. The command</p>
+
+<p><code>ruby
+system "echo 'My Octopress Page is coming soon &amp;hellip;' &gt; index.html"
+</code></p>
+
+<p>failed with the error message</p>
+
+<pre><code>'hellip' is not recognized as an internal or external command, operable program or batch file.
+</code></pre>
+
+<p>So the easy thing to do is to just replace the <code>&amp;hellip;</code> with '...' in Rakefile.</p>
+
+<p>``` diff Replacing hellip
+@@ -335,7 +335,7 @@ task :setup_github_pages, :repo do |t, args|
+   mkdir deploy_dir
+   cd "#{deploy_dir}" do</p>
+
+<pre><code> system "git init"
+</code></pre>
+
+<ul>
+<li> system "echo 'My Octopress Page is coming soon &hellip;' > index.html"</li>
+<li> system "echo 'My Octopress Page is coming soon ...' > index.html"
+ system "git add ."
+ system "git commit -m \"Octopress init\""
+ system "git branch -m gh-pages" unless branch == 'master'
+```</li>
+</ul>
+
+
+<h2>Using HTTPS instead of SSH</h2>
+
+<p>The next problem rose when I tried to run the deploy task to deploy the first time to GitHub. For some reason that I couldn't really figure out, I was denied access when trying to push the site to GitHub. Something to do with the SSH key.</p>
+
+<pre><code>##Pushing generated _deploy website
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>So I went back to the Rakefile to change the method from SSH to HTTPS. This meant that I had to change the regular expression that extracted the user name from the repository URL.</p>
+
+<p>``` diff Changing the repository URL regex
+@@ -303,8 +303,8 @@ task :setup_github_pages, :repo do |t, args|</p>
+
+<pre><code> puts "(For example, 'git@github.com:your_username/your_username.github.com)"
+ repo_url = get_stdin("Repository url: ")
+</code></pre>
+
+<p>   end
+-  user = repo_url.match(/:([<sup>\/]+)/)[1]</sup>
+-  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? 'gh-pages' : 'master'
++  user = repo_url.match(/https:\/\/github.com\/([<sup>\/]+)/)[1]</sup>
++  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? 'gh-pages' : 'master'
+   project = (branch == 'gh-pages') ? repo_url.match(/\/([<sup>.]+)/)[1]</sup> : ''
+   unless <code>git remote -v</code>.match(/origin.+?octopress.git/).nil?</p>
+
+<pre><code> # If octopress is still the origin remote (from cloning) rename it to octopress
+</code></pre>
+
+<p>```</p>
+
+<p>After that fix the site deployed to GitHub without errors.</p>
+
+<h2>No syntax highlighting</h2>
+
+<p>When I started to write the first post I noticed that syntax highlighting didn't work, neither triple-backtick nor codeblocks. Rob Anderson mentioned this in his post and his solution worked for me too, with the twist that I had to reboot my computer after installing Python 2.7.</p>
+
+<h2>Workflow</h2>
+
+<p>Even though I just started the blog, I already love the workflow. Editing markdown in a text editor is so much nicer than using some awful web based WYSIWIG tool. I keep my local repository in a dropbox folder, which makes it easy for me to edit posts on devices that do not have Ruby and Git installed.</p>
+
+<p>To edit posts I use <a href="http://www.sublimetext.com/">Sublime Text 2</a>. Previously I have been using the <a href="https://github.com/michfield/StrapdownPreview">Strapdown.js Preview package</a> to preview markdown in the browser, but it does not handle the Octopress syntax highlighting extensions very well.</p>
+
+<p>Today I discovered <a href="http://livereload.com/">LiveReload</a>. LiveReload monitors the file system and refreshes the browser when changes are detected. A <a href="https://github.com/dz0ny/LiveReload-sublimetext2">Sublime package for LiveReload</a> is available which handles the communication with the browser. Combining this with Octopress' preview task that regenerates the site when markdown changes are detected is pretty cool. When I save the markdown file, the browser refreshes with the updated post.</p>
+
+<p>Now I just need to customize the theme a little.</p>
+]]></content>
+  </entry>
+  
+</feed>

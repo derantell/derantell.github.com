@@ -4,7 +4,7 @@
   <title><![CDATA[Department 1337]]></title>
   <link href="http://derantell.github.com/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-11-29T00:24:29+01:00</updated>
+  <updated>2012-12-02T23:15:47+01:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -14,11 +14,118 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Getting started with Octopress on Windows]]></title>
+    <link href="http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows/"/>
+    <updated>2012-12-02T22:56:00+01:00</updated>
+    <id>http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows</id>
+    <content type="html"><![CDATA[<p>This blog is using the <a href="http://octopress.org/">Octopress</a> framework for the <a href="https://github.com/mojombo/jekyll">Jekyll</a> static site generator. When setting everything up I followed the <a href="http://octopress.org/docs/setup/">Octopress setup guide</a> and <a href="http://blog.zerosharp.com/setting-up-octopress-on-windows/">Rob Anderson&#8217;s instructions</a> on how to do this on a Windows 7 machine. In this post I&#8217;ll describe a few tweaks I had to make to get it all set up.</p>
+
+<!-- More -->
+
+
+<h2>The hellip command</h2>
+
+<p>Cloning the repo and installing the dependencies and the theme went without any problems. I experienced a slight hiccup when running the <code>setup_github_pages</code> task. The command</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octopress Page is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>failed with the error message</p>
+
+<pre><code>'hellip' is not recognized as an internal or external command, operable program or batch file.
+</code></pre>
+
+<p>So the easy thing to do is to just replace the <code>&amp;hellip;</code> with &#8216;&#8230;&#8217; in Rakefile.</p>
+
+<figure class='code'><figcaption><span>Replacing hellip</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gu">@@ -335,7 +335,7 @@ task :setup_github_pages, :repo do |t, args|</span>
+</span><span class='line'>   mkdir deploy_dir
+</span><span class='line'>   cd &quot;#{deploy_dir}&quot; do
+</span><span class='line'>     system &quot;git init&quot;
+</span><span class='line'><span class="gd">-    system &quot;echo &#39;My Octopress Page is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span><span class='line'><span class="gi">+    system &quot;echo &#39;My Octopress Page is coming soon ...&#39; &gt; index.html&quot;</span>
+</span><span class='line'>     system &quot;git add .&quot;
+</span><span class='line'>     system &quot;git commit -m \&quot;Octopress init\&quot;&quot;
+</span><span class='line'>     system &quot;git branch -m gh-pages&quot; unless branch == &#39;master&#39;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Using HTTPS instead of SSH</h2>
+
+<p>The next problem rose when I tried to run the deploy task to deploy the first time to GitHub. For some reason that I couldn&#8217;t really figure out, I was denied access when trying to push the site to GitHub. Something to do with the SSH key.</p>
+
+<pre><code>##Pushing generated _deploy website
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>So I went back to the Rakefile to change the method from SSH to HTTPS. This meant that I had to change the regular expression that extracted the user name from the repository URL.</p>
+
+<figure class='code'><figcaption><span>Changing the repository URL regex</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gu">@@ -303,8 +303,8 @@ task :setup_github_pages, :repo do |t, args|</span>
+</span><span class='line'>     puts &quot;(For example, &#39;git@github.com:your_username/your_username.github.com)&quot;
+</span><span class='line'>     repo_url = get_stdin(&quot;Repository url: &quot;)
+</span><span class='line'>   end
+</span><span class='line'><span class="gd">-  user = repo_url.match(/:([^\/]+)/)[1]</span>
+</span><span class='line'><span class="gd">-  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? &#39;gh-pages&#39; : &#39;master&#39;</span>
+</span><span class='line'><span class="gi">+  user = repo_url.match(/https:\/\/github\.com\/([^\/]+)/)[1]</span>
+</span><span class='line'><span class="gi">+  branch = (repo_url.match(/\/[\w-]+\.github\.com/).nil?) ? &#39;gh-pages&#39; : &#39;master&#39;</span>
+</span><span class='line'>   project = (branch == &#39;gh-pages&#39;) ? repo_url.match(/\/([^\.]+)/)[1] : &#39;&#39;
+</span><span class='line'>   unless `git remote -v`.match(/origin.+?octopress.git/).nil?
+</span><span class='line'>     # If octopress is still the origin remote (from cloning) rename it to octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that fix the site deployed to GitHub without errors.</p>
+
+<h2>No syntax highlighting</h2>
+
+<p>When I started to write the first post I noticed that syntax highlighting didn&#8217;t work, neither triple-backtick nor codeblocks. Rob Anderson mentioned this in his post and his solution worked for me too, with the twist that I had to reboot my computer after installing Python 2.7.</p>
+
+<h2>Workflow</h2>
+
+<p>Even though I just started the blog, I already love the workflow. Editing markdown in a text editor is so much nicer than using some awful web based WYSIWIG tool. I keep my local repository in a dropbox folder, which makes it easy for me to edit posts on devices that do not have Ruby and Git installed.</p>
+
+<p>To edit posts I use <a href="http://www.sublimetext.com/">Sublime Text 2</a>. Previously I have been using the <a href="https://github.com/michfield/StrapdownPreview">Strapdown.js Preview package</a> to preview markdown in the browser, but it does not handle the Octopress syntax highlighting extensions very well.</p>
+
+<p>Today I discovered <a href="http://livereload.com/">LiveReload</a>. LiveReload monitors the file system and refreshes the browser when changes are detected. A <a href="https://github.com/dz0ny/LiveReload-sublimetext2">Sublime package for LiveReload</a> is available which handles the communication with the browser. Combining this with Octopress&#8217; preview task that regenerates the site when markdown changes are detected is pretty cool. When I save the markdown file, the browser refreshes with the updated post.</p>
+
+<p>Now I just need to customize the theme a little.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[A Powershell cmdlet to remove meaningless fluff from C# files]]></title>
     <link href="http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/"/>
     <updated>2012-11-28T23:01:00+01:00</updated>
     <id>http://derantell.github.com/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files</id>
     <content type="html"><![CDATA[<p>In C# you can add folding points to the code file by using the <code>#region</code> directive. The question of <a href="http://stackoverflow.com/questions/755465/do-you-say-no-to-c-sharp-regions">how and when</a> (<a href="http://www.codinghorror.com/blog/2008/07/the-problem-with-code-folding.html">if ever</a>) to use this feature is an endless debate among C# developers. Some find it useful for grouping members with related functionality or by accessibility level, some just hate them.</p>
+
+<!-- More -->
+
 
 <p>My personal opinion is that regions are pretty much useless. When I open a file in the editor I expect to see the code. Not a bunch of gray text blocks, which is the default behavior in Visual Studio. Hiding generated code that is never to be touched or non-implemented members from a poorly designed abstract base class with too many responsibilities, are a couple of use cases that I think are justified. A few years ago I found out that you could disable folding/outlining by navigating to <em>tools > options > text editor > c# > advanced</em> and uncheck the <em>Enter outlining mode when files open</em> option. I&#8217;ve left it like that ever since. There is also the <a href="http://visualstudiogallery.msdn.microsoft.com/0ca60d35-1e02-43b7-bf59-ac7deb9afbca">I Hate #Regions</a> Visual Studio extension that does the same thing, more or less.</p>
 

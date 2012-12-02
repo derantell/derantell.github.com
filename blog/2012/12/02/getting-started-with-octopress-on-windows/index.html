@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting started with Octopress on Windows - Department 1337</title>
+  <meta name="author" content="David Tellander">
+
+  
+  <meta name="description" content="This blog is using the Octopress framework for the Jekyll static site generator. When setting everything up I followed the Octopress setup guide and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Department 1337" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36758970-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Department 1337</a></h1>
+  
+    <h2>They mostly code at night. Mostly.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:derantell.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Getting Started With Octopress on Windows</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-02T22:56:00+01:00" pubdate data-updated="true">2012-12-02 22:56 CET</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This blog is using the <a href="http://octopress.org/">Octopress</a> framework for the <a href="https://github.com/mojombo/jekyll">Jekyll</a> static site generator. When setting everything up I followed the <a href="http://octopress.org/docs/setup/">Octopress setup guide</a> and <a href="http://blog.zerosharp.com/setting-up-octopress-on-windows/">Rob Anderson&#8217;s instructions</a> on how to do this on a Windows 7 machine. In this post I&#8217;ll describe a few tweaks I had to make to get it all set up.</p>
+
+<!-- More -->
+
+
+<h2>The hellip command</h2>
+
+<p>Cloning the repo and installing the dependencies and the theme went without any problems. I experienced a slight hiccup when running the <code>setup_github_pages</code> task. The command</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octopress Page is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>failed with the error message</p>
+
+<pre><code>'hellip' is not recognized as an internal or external command, operable program or batch file.
+</code></pre>
+
+<p>So the easy thing to do is to just replace the <code>&amp;hellip;</code> with &#8216;&#8230;&#8217; in Rakefile.</p>
+
+<figure class='code'><figcaption><span>Replacing hellip</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gu">@@ -335,7 +335,7 @@ task :setup_github_pages, :repo do |t, args|</span>
+</span><span class='line'>   mkdir deploy_dir
+</span><span class='line'>   cd &quot;#{deploy_dir}&quot; do
+</span><span class='line'>     system &quot;git init&quot;
+</span><span class='line'><span class="gd">-    system &quot;echo &#39;My Octopress Page is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span><span class='line'><span class="gi">+    system &quot;echo &#39;My Octopress Page is coming soon ...&#39; &gt; index.html&quot;</span>
+</span><span class='line'>     system &quot;git add .&quot;
+</span><span class='line'>     system &quot;git commit -m \&quot;Octopress init\&quot;&quot;
+</span><span class='line'>     system &quot;git branch -m gh-pages&quot; unless branch == &#39;master&#39;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Using HTTPS instead of SSH</h2>
+
+<p>The next problem rose when I tried to run the deploy task to deploy the first time to GitHub. For some reason that I couldn&#8217;t really figure out, I was denied access when trying to push the site to GitHub. Something to do with the SSH key.</p>
+
+<pre><code>##Pushing generated _deploy website
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>So I went back to the Rakefile to change the method from SSH to HTTPS. This meant that I had to change the regular expression that extracted the user name from the repository URL.</p>
+
+<figure class='code'><figcaption><span>Changing the repository URL regex</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='diff'><span class='line'><span class="gu">@@ -303,8 +303,8 @@ task :setup_github_pages, :repo do |t, args|</span>
+</span><span class='line'>     puts &quot;(For example, &#39;git@github.com:your_username/your_username.github.com)&quot;
+</span><span class='line'>     repo_url = get_stdin(&quot;Repository url: &quot;)
+</span><span class='line'>   end
+</span><span class='line'><span class="gd">-  user = repo_url.match(/:([^\/]+)/)[1]</span>
+</span><span class='line'><span class="gd">-  branch = (repo_url.match(/\/[\w-]+.github.com/).nil?) ? &#39;gh-pages&#39; : &#39;master&#39;</span>
+</span><span class='line'><span class="gi">+  user = repo_url.match(/https:\/\/github\.com\/([^\/]+)/)[1]</span>
+</span><span class='line'><span class="gi">+  branch = (repo_url.match(/\/[\w-]+\.github\.com/).nil?) ? &#39;gh-pages&#39; : &#39;master&#39;</span>
+</span><span class='line'>   project = (branch == &#39;gh-pages&#39;) ? repo_url.match(/\/([^\.]+)/)[1] : &#39;&#39;
+</span><span class='line'>   unless `git remote -v`.match(/origin.+?octopress.git/).nil?
+</span><span class='line'>     # If octopress is still the origin remote (from cloning) rename it to octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that fix the site deployed to GitHub without errors.</p>
+
+<h2>No syntax highlighting</h2>
+
+<p>When I started to write the first post I noticed that syntax highlighting didn&#8217;t work, neither triple-backtick nor codeblocks. Rob Anderson mentioned this in his post and his solution worked for me too, with the twist that I had to reboot my computer after installing Python 2.7.</p>
+
+<h2>Workflow</h2>
+
+<p>Even though I just started the blog, I already love the workflow. Editing markdown in a text editor is so much nicer than using some awful web based WYSIWIG tool. I keep my local repository in a dropbox folder, which makes it easy for me to edit posts on devices that do not have Ruby and Git installed.</p>
+
+<p>To edit posts I use <a href="http://www.sublimetext.com/">Sublime Text 2</a>. Previously I have been using the <a href="https://github.com/michfield/StrapdownPreview">Strapdown.js Preview package</a> to preview markdown in the browser, but it does not handle the Octopress syntax highlighting extensions very well.</p>
+
+<p>Today I discovered <a href="http://livereload.com/">LiveReload</a>. LiveReload monitors the file system and refreshes the browser when changes are detected. A <a href="https://github.com/dz0ny/LiveReload-sublimetext2">Sublime package for LiveReload</a> is available which handles the communication with the browser. Combining this with Octopress&#8217; preview task that regenerates the site when markdown changes are detected is pretty cool. When I save the markdown file, the browser refreshes with the updated post.</p>
+
+<p>Now I just need to customize the theme a little.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">David Tellander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-02T22:56:00+01:00" pubdate data-updated="true">2012-12-02 22:56 CET</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows/" data-via="derantell" data-counturl="http://derantell.github.com/blog/2012/12/02/getting-started-with-octopress-on-windows/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/" title="Previous Post: A Powershell cmdlet to remove meaningless fluff from C# files">&laquo; A Powershell cmdlet to remove meaningless fluff from C# files</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/12/02/getting-started-with-octopress-on-windows/">Getting started with Octopress on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/28/a-powershell-cmdlet-to-remove-meaningless-fluff-from-c-files/">A Powershell cmdlet to remove meaningless fluff from C# files</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/derantell">@derantell</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'derantell',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("derantell", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/derantell" class="twitter-follow-button" data-show-count="false">Follow @derantell</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - David Tellander -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
