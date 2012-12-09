@@ -9,6 +9,8 @@ categories: [powershell,regex,style]
 
 In C# you can add folding points to the code file by using the `#region` directive. The question of [how and when](http://stackoverflow.com/questions/755465/do-you-say-no-to-c-sharp-regions) ([if ever](http://www.codinghorror.com/blog/2008/07/the-problem-with-code-folding.html)) to use this feature is an endless debate among C# developers. Some find it useful for grouping members with related functionality or by accessibility level, some just hate them.
 
+<!-- More -->
+
 My personal opinion is that regions are pretty much useless. When I open a file in the editor I expect to see the code. Not a bunch of gray text blocks, which is the default behavior in Visual Studio. Hiding generated code that is never to be touched or non-implemented members from a poorly designed abstract base class with too many responsibilities, are a couple of use cases that I think are justified. A few years ago I found out that you could disable folding/outlining by navigating to _tools > options > text editor > c# > advanced_ and uncheck the _Enter outlining mode when files open_ option. I've left it like that ever since. There is also the [I Hate #Regions](http://visualstudiogallery.msdn.microsoft.com/0ca60d35-1e02-43b7-bf59-ac7deb9afbca) Visual Studio extension that does the same thing, more or less.
 
 ## The regionalize everything style
