@@ -4,7 +4,7 @@
   <title><![CDATA[Department 1337]]></title>
   <link href="http://derantell.github.com/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-12-02T23:15:47+01:00</updated>
+  <updated>2012-12-16T20:57:29+01:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Executing Powershell scripts with Launchy]]></title>
+    <link href="http://derantell.github.com/blog/2012/12/11/executing-powershell-scripts-with-launchy/"/>
+    <updated>2012-12-11T18:53:00+01:00</updated>
+    <id>http://derantell.github.com/blog/2012/12/11/executing-powershell-scripts-with-launchy</id>
+    <content type="html"><![CDATA[<p>An app launcher is an application that lets you launch applications without taking your hands off the keyboard. Just hit the hot key, type a few characters to match the application or file you want to open and you are done. Most launchers can do a lot more than just launching applications, e.g. open websites if you type an URL, act as a simple calculator or&#8212;as we will explore in this post&#8212;execute scripts.</p>
+
+<!-- more -->
+
+
+<h2>Invoking Powershell via Launchy</h2>
+
+<p>I have been using the <a href="http://www.launchy.net/">Launchy app launcher</a> for a few years, but not for more advanced tasks than the Windows Start button can handle. So I decided to try some more advanced uses.</p>
+
+<p>Since Launchy can execute batch files, you can use it to perform almost any task you can think of.</p>
+
+<p>The first thing we need to do is to tell Launchy where to look for the batch files we want to execute. You do that in the settings under the Catalog tab. Add the directory where the scripts are located and add <code>*.cmd</code> and <code>*.bat</code> as file type filters. I keep my scripts in a <a href="http://dropbox.com">Dropbox</a> folder that is also a <a href="https://github.com/derantell/LaunchyScripts">Git repository</a>. That way I have easy access to my scripts on any Windows computer I use.</p>
+
+<p>Next we need to create a <code>.bat</code> or <code>.cmd</code> file that will implement our task. This can be just about anything. Launchy also lets you supply parameters to a command by pressing <code>tab</code> when you have matched the command you want to execute.</p>
+
+<p>In this example I will create a batch file that executes a Powershell script that encodes its argument using Base64 encoding. We start with the simple batch file that will bootstrap the Powershell script:</p>
+
+<figure class='code'><figcaption><span>Bootstrap batch file </span><a href='https://github.com/derantell/LaunchyScripts/blob/master/base64.cmd'>base64.cmd</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bat'><span class='line'><span class="p">@</span><span class="k">echo</span> <span class="k">off</span>
+</span><span class='line'>powershell.exe -file .\base<span class="m">64</span>.ps<span class="m">1</span> <span class="nv">%1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The batch file just starts a new Powershell process, passing the name of the Powershell script that implements the Base64 encoding task. The first argument of the batch file is passed on to the Powershell script.</p>
+
+<p><a href="http://technet.microsoft.com/en-us/library/dd315276.aspx">Powershell.exe</a> offers three different ways to pass code to be executed.</p>
+
+<ul>
+<li>A script file via the <code>-File</code> parameter</li>
+<li><a href="http://dmitrysotnikov.wordpress.com/2011/07/06/passing-parameters-to-encodedcommand/">Base64 encoded command</a> via the <code>-EncodedCommand</code> parameter</li>
+<li>A string or script block via the <code>-Command</code> parameter</li>
+</ul>
+
+
+<p>The Powershell script first tests whether its argument is the path to an existing file. If it is a file path, the file&#8217;s content is read and put in a variable. If it is not a file, the text of the argument is encoded using UTF-8. Then the data is Base64 encoded and the result is piped to the clipboard using the <a href="http://blogs.msdn.com/b/tilovell/archive/2011/09/14/work-tool-of-the-day-clip-exe.aspx">clip.exe utility</a>.</p>
+
+<figure class='code'><figcaption><span>Base64 encoding script </span><a href='https://github.com/derantell/LaunchyScripts/blob/master/base64.ps1'>base64.ps1 </a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ps1'><span class='line'><span class="k">param</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="nb">test-path</span> <span class="nv">$text</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$path</span> <span class="p">=</span> <span class="nb">resolve-path</span> <span class="nv">$text</span>
+</span><span class='line'>    <span class="nv">$bytes</span> <span class="p">=</span> <span class="no">[System.IO.File]</span><span class="err">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$path</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$bytes</span> <span class="p">=</span> <span class="no">[System.Text.Encoding]</span><span class="err">::</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">[convert]</span><span class="err">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="nv">$bytes</span><span class="p">)</span> <span class="p">|</span> <span class="n">clip</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can just trigger Launchy and type</p>
+
+<p><code>base64 &gt; c:\temp\cute_cat.jpg</code></p>
+
+<p>and the Base64 encoded content of the file is ready for you on the clipboard.</p>
+
+<p>If you are interested <a href="https://github.com/derantell/LaunchyScripts">my scripts are available on GitHub</a> and currently I have implemented four simple text manipulation tasks: <a href="https://github.com/derantell/LaunchyScripts/blob/master/urlencode.cmd">urlencode</a>, <a href="https://github.com/derantell/LaunchyScripts/blob/master/base64.cmd">base64</a>, <a href="https://github.com/derantell/LaunchyScripts/blob/master/slugify.cmd">slugify</a> and <a href="https://github.com/derantell/LaunchyScripts/blob/master/hash.cmd">hash</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting started with Octopress on Windows]]></title>
