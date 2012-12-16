@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Powershell | Department 1337]]></title>
   <link href="http://derantell.github.com/blog/categories/powershell/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-12-16T20:57:29+01:00</updated>
+  <updated>2012-12-16T21:18:53+01:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Executing Powershell scripts with Launchy]]></title>
-    <link href="http://derantell.github.com/blog/2012/12/11/executing-powershell-scripts-with-launchy/"/>
-    <updated>2012-12-11T18:53:00+01:00</updated>
-    <id>http://derantell.github.com/blog/2012/12/11/executing-powershell-scripts-with-launchy</id>
+    <link href="http://derantell.github.com/blog/2012/12/16/executing-powershell-scripts-with-launchy/"/>
+    <updated>2012-12-16T20:50:00+01:00</updated>
+    <id>http://derantell.github.com/blog/2012/12/16/executing-powershell-scripts-with-launchy</id>
     <content type="html"><![CDATA[<p>An app launcher is an application that lets you launch applications without taking your hands off the keyboard. Just hit the hot key, type a few characters to match the application or file you want to open and you are done. Most launchers can do a lot more than just launching applications, e.g. open websites if you type an URL, act as a simple calculator or---as we will explore in this post---execute scripts.</p>
 
 <!-- more -->
