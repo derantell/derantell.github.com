@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Executing Powershell scripts with Launchy"
-date: 2012-12-11 18:53
+date: 2012-12-16 20:50
 comments: false
 categories: Powershell Productivity
 ---
