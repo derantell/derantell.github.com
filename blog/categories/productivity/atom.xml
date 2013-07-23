@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Productivity | Department 1337]]></title>
   <link href="http://derantell.github.com/blog/categories/productivity/atom.xml" rel="self"/>
   <link href="http://derantell.github.com/"/>
-  <updated>2012-12-16T21:18:53+01:00</updated>
+  <updated>2013-07-23T23:41:23+02:00</updated>
   <id>http://derantell.github.com/</id>
   <author>
     <name><![CDATA[David Tellander]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why I switched from a Swedish to a US keyboard]]></title>
+    <link href="http://derantell.github.com/blog/2013/07/23/why-i-switched-from-a-swedish-to-a-us-keyboard/"/>
+    <updated>2013-07-23T23:30:00+02:00</updated>
+    <id>http://derantell.github.com/blog/2013/07/23/why-i-switched-from-a-swedish-to-a-us-keyboard</id>
+    <content type="html"><![CDATA[<p>Over the years I have noticed that the more experienced I get, the lazier I get when it comes to interacting with a computer. Reaching for the mouse becomes more and more awkward. The more you can do with your hands on the keyboard the better, right?</p>
+
+<!-- more -->
+
+
+<p>Most the time I spend in front of a keyboard---about 80%---I either code or write English text. I only use Swedish in mail conversations and some client focused documentation.</p>
+
+<p>That is why I have become more and more frustrated by the layout of the Swedish keyboard. The main pain points are</p>
+
+<ul>
+<li><code>[]</code>, <code>{}</code>, <code>$</code>, <code>|</code> and <code>\</code> are <em>third level</em> (i.e. accessed via <code>AltGr</code> or <code>Ctrl</code>+<code>Alt</code>)</li>
+<li><code>^</code>, <code>~</code> and <code>`</code> are <a href="http://en.wikipedia.org/wiki/Dead_key">dead keys</a></li>
+<li><code>&lt;&gt;</code> are on the same key (minor inconvenience perhaps, but my brain has never learned which one is shifted.)</li>
+<li>Most keyboard shortcut schemes of tools and well designed web applications are made with the US keyboard layout in mind.</li>
+</ul>
+
+
+<p><img class="center" src="/images/KB_Sweden.png" title="Swedish keyboard layout" alt="Swedish keyboard layout"></p>
+
+<p>The reason the Swedish keyboard looks the way it does is because of the three extra vowels Å, Ä and Ö that had to be first level characters on the keyboard.</p>
+
+<p>After having said to myself for years: "Man, I wish I had a US keyboard", the tipping point finally came when I decided to learn vim commands in <a href="http://www.sublimetext.com/docs/2/vintage.html">Sublime Text's Vintage mode</a>. Some useful commands just did not work or were very awkward to type.</p>
+
+<h2>Rewiring the brain</h2>
+
+<p>So I ordered the US version of the keyboard I use, the <a href="http://www.microsoft.com/hardware/en-us/p/natural-ergonomic-keyboard-4000">Microsoft Natural Ergonomic Keyboard 4000</a>.</p>
+
+<p>Since I have been <a href="https://en.wikipedia.org/wiki/Touch_typing">touch typing</a> for the last ten years and are quickly approaching 40, I was worried that it was too late for me to learn a new keyboard layout. However, it was surprisingly easy! The first few weeks there were a lot of mistyping, but after about a month the new layout had settled.</p>
+
+<p>The hardest part was to relearn the new positions of Å, Ä and Ö when writing Swedish.</p>
+
+<h2>Layouts</h2>
+
+<p>To be able to type European letters on a US keyboard, the <a href="http://commons.wikimedia.org/wiki/File:KB_US-International.svg">US International keyboard</a> should be set as the input keyboard layout. Here are instructions for how to change keyboard layouts on <a href="http://support.microsoft.com/kb/258824">Windows 7</a>, <a href="http://www.howtogeek.com/121169/how-to-change-your-keyboard-layout-in-windows-8/">Windows 8</a>, and <a href="http://www.wikihow.com/Change-the-Keyboard-Language-of-a-Mac">Mac</a>. In this layout Å, Ä and Ö are on the third level of <code>W</code>, <code>Q</code> and <code>P</code>, respectively.</p>
+
+<p><img class="center" src="/images/KB_US-International.png" title="US International keyboard layout" alt="US International keyboard layout"></p>
+
+<p>An alternative keyboard layout is the <a href="http://eurkey.steffen.bruentjen.eu/start.html">EurKEY layout</a> by Steffen Brüntjen, which is based on the US layout, but adds a lot of accented characters used in European languages. It also adds Greek letters and mathematical symbols which are available after pressing a dead key. E.g. the <code>Alt Gr</code>+<code>m</code> dead key toggles the Greek alphabet, hence <code>Alt Gr</code>+<code>m</code> followed by <code>p</code> produces π.</p>
+
+<h2>Conclusion</h2>
+
+<p>I have now been using EurKEY on a US keyboard for six months. On the positive side</p>
+
+<ul>
+<li>coding feels much more natural than before</li>
+<li>keyboard shortcuts work as expected in all tools and apps</li>
+</ul>
+
+
+<p>However, there are some issues</p>
+
+<ul>
+<li>my current work laptop has a Swedish keyboard, I usually switch back to the Swedish layout when undocking it</li>
+<li>remoting into servers that does not have a US layout activated causes me trouble sometimes</li>
+<li>pair programming when you don't have two keyboards and are pairing with a programmer that uses a Swedish keyboard</li>
+</ul>
+
+
+<p>All in all, I will stick to the US keyboard as long as I primarily use it to write code and English text. And I encourage other programmers/power users to try the switch if they are in a similar situation as myself.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Executing Powershell scripts with Launchy]]></title>
